@@ -36,9 +36,8 @@ public class PasswordValidator implements Function<PasswordValidationRequest, Pa
     }
 
     private boolean isPasswordValid(PasswordRule rule) {
-        Expression expression = expressionCache.computeIfAbsent(
-                rule.getCondition(), parser::parseExpression);
 
-        return Boolean.TRUE.equals(expression.getValue(context, Boolean.class));
+        return Boolean.TRUE.equals(expressionCache.computeIfAbsent(
+                rule.getCondition(), parser::parseExpression).getValue(context, Boolean.class));
     }
 }
